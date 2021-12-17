@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN ll Socketio y Python</title>
+</head>
+<body>
+
+    <h1>Python y Socketio</h1>
+
+    <ul id="messages"></ul>
+    <input type="text" id="myMessage">
+    <button type="button" id="send">Enviar</button>
+
+     <!-- jquery -->
+    <script
+		src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous">
+    </script>
+
+     <!-- Socketio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js" charset="utf-8"></script>
+    <script>
+        const socket = io();
+
+        socket.emit('message', 'hola');
+
+        socket.on('message', function (msg) {
+            $('#messages').append('<li>' + msg + '</li>')
+
+        })
+
+        $('#send').on('click', function () {
+            socket.send($('#myMessage').val());
+            $('#myMessage').val('');
+        });
+        
+
+    </script>
+</body>
+</html>
+
